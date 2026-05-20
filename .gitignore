@@ -1,0 +1,20 @@
+# Local directory for data source and provider plugins
+.terraform/
+
+# Do not commit local state files or backup files
+*.tfstate
+*.tfstate.*
+
+# Crash logs of the terraform executable
+crash.log
+crash.*.log
+
+# Exclude override files as they may contain local custom setups
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include CLI configuration files
+.terraformrc
+terraform.rc
