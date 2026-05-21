@@ -238,24 +238,24 @@ resource "azurerm_monitor_diagnostic_setting" "logic_app" {
 
 # Role Assignment for Logic Apps to access Storage Account
 # Uses Storage Blob Data Contributor role for secure RBAC access
-resource "azurerm_role_assignment" "logic_app_storage" {
-  scope                = azurerm_storage_account.backup.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_logic_app_workflow.backup.identity[0].principal_id
-
-  depends_on = [
-    azurerm_logic_app_workflow.backup,
-    azurerm_storage_account.backup
-  ]
-}
+# resource "azurerm_role_assignment" "logic_app_storage" {
+#   scope                = azurerm_storage_account.backup.id
+#   role_definition_name = "Storage Blob Data Contributor"
+#   principal_id         = azurerm_logic_app_workflow.backup.identity[0].principal_id
+# 
+#   depends_on = [
+#     azurerm_logic_app_workflow.backup,
+#     azurerm_storage_account.backup
+#   ]
+# }
 
 # Time delay to ensure role assignments propagate before execution
 resource "time_sleep" "wait_for_resources" {
   depends_on = [
     azurerm_storage_account.backup,
     azurerm_storage_container.backup_files,
-    azurerm_logic_app_workflow.backup,
-    azurerm_role_assignment.logic_app_storage
+    azurerm_logic_app_workflow.backup
+    # azurerm_role_assignment.logic_app_storage
   ]
 
   create_duration = "30s"
