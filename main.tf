@@ -123,6 +123,12 @@ resource "azurerm_logic_app_workflow" "backup" {
     })
   }
 
+  # Runtime environment assignments (Supplies the values to the schema above)
+  parameters = {
+    "storageAccountName" = var.storage_account_name != "" ? var.storage_account_name : "st${var.workload}${random_string.suffix.result}"
+    "containerName"      = var.container_name
+  }
+
   tags = merge(var.common_tags, {
     Component = "Automation"
     Purpose   = "BackupWorkflow"
