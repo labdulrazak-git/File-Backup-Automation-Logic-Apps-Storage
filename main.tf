@@ -2,6 +2,11 @@
 # This Terraform configuration creates a complete backup solution using
 # Azure Logic Apps and Blob Storage for automated file backup operations.
 
+import {
+  to = azurerm_resource_group.backup
+  id = "/subscriptions/f1f0b6b4-7c21-4928-809d-12903053d8ac/resourceGroups/rg-backup-automation"
+}
+
 # Generate random suffix for unique resource names
 resource "random_string" "suffix" {
   length  = 6
